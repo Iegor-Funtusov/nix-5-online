@@ -28,6 +28,7 @@ public class UserController {
                     readAll(reader);
                 } break;
             }
+            System.out.println("please, repeat operstions");
         }
     }
 
