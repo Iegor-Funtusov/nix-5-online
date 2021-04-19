@@ -14,7 +14,7 @@ public class UserController {
     public void readConsole() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("hello");
-        System.out.println("please, enter input  ");
+        System.out.println("please, enter input    ");
         String input;
         while ((input = reader.readLine()) != null) {
             switch (input) {
