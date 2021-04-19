@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DB {
 
-    private List<User> users = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
 
     public void add(User user) {
         users.add(user);
