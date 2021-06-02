@@ -7,6 +7,10 @@ import static ua.com.alevel.CollectionMain.SIZE;
 public class ListTest {
 
     public void test() {
+
+
+
+
         String s = "res";
         GenericClass<String> genericClass = new GenericClass<>();
         genericClass.setRes(s);
@@ -46,6 +50,7 @@ public class ListTest {
 
         List<Integer> integerArrayList = new ArrayList<>();
         List<Integer> integerLinkedList = new LinkedList<>();
+        Collections.sort(integerLinkedList);
 
         System.out.println("ADD");
         long start = System.currentTimeMillis();
