@@ -1,4 +1,4 @@
-package ua.com.alevel;
+package ua.com.alevel.writer;
 
 import java.io.FileWriter;
 import java.io.IOException;
