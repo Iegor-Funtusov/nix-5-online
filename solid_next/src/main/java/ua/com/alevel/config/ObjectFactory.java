@@ -1,70 +1,52 @@
 package ua.com.alevel.config;
 
-import org.reflections.Reflections;
-import ua.com.alevel.dao.UserDao;
-import ua.com.alevel.service.UserService;
-
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ObjectFactory {
 
-    private static ObjectFactory instance;
-    private static final String ROOT_PACKAGE = "ua.com.alevel";
+    private ApplicationContext context;
+    private List<ObjectConfigurator> objectConfigurators;
 
-    private final Set<Class<? extends UserDao>> setDao;
-    private final Set<Class<? extends UserService>> setService;
+    public ObjectFactory(ApplicationContext context) {
+        this.objectConfigurators = new ArrayList<>();
+        this.context = context;
 
-    private ObjectFactory() {
-        Reflections reflections = new Reflections(ROOT_PACKAGE);
-        setDao = reflections.getSubTypesOf(UserDao.class);
-        setService = reflections.getSubTypesOf(UserService.class);
-    }
+        Set<Class<? extends ObjectConfigurator>> subTypesOf = this.context.getApplicationConfiguration().getScanner().getSubTypesOf(ObjectConfigurator.class);
+        System.out.println("subTypesOf = " + subTypesOf.size());
 
-    public static ObjectFactory getInstance() {
-        if (instance == null) {
-            instance = new ObjectFactory();
-        }
-        return instance;
-    }
-
-    public UserDao getUserDao() {
-        if (setDao.isEmpty()) {
-            throw new RuntimeException("user dao is not implemented");
-        }
-        for (Class<? extends UserDao> aClass : setDao) {
+        for (Class<? extends ObjectConfigurator> aClass : subTypesOf) {
             try {
-                return aClass.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                objectConfigurators.add(aClass.getDeclaredConstructor().newInstance());
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
-        throw new RuntimeException("user dao is not implemented");
     }
 
-    public UserService getUserService() {
-        if (setService.isEmpty()) {
-            throw new RuntimeException("user service is not implemented");
+    public <I> I createObject(Class<? extends I> impl) {
+        I i;
+        try {
+            i = create(impl);
+            configure(i);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
-        for (Class<? extends UserService> aClass : setService) {
-            try {
-                return aClass.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
+        return i;
+    }
+
+    private <I> I create(Class<? extends I> impl) {
+        try {
+            return impl.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
         }
-        throw new RuntimeException("user service is not implemented");
+        throw new RuntimeException("can not create");
+    }
+
+    private <I> void configure(I i) {
+        objectConfigurators.forEach(objectConfigurator -> objectConfigurator.configure(i, context));
     }
 }

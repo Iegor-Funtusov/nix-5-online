@@ -1,6 +1,7 @@
 package ua.com.alevel.controller;
 
-import ua.com.alevel.config.ObjectFactory;
+import ua.com.alevel.config.annotation.Autowired;
+import ua.com.alevel.config.annotation.Service;
 import ua.com.alevel.entity.User;
 import ua.com.alevel.service.UserService;
 
@@ -8,9 +9,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Service
 public class UserController {
 
-    private UserService userService = ObjectFactory.getInstance().getUserService();
+    @Autowired
+    private UserService userService;
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +45,7 @@ public class UserController {
 
     private void create(BufferedReader reader) {
         System.out.println("UserController.create");
-
+        System.out.println("userService = " + userService);
         try {
             System.out.println("Please, enter your name");
             String name = reader.readLine();

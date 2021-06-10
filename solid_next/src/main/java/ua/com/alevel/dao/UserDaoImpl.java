@@ -1,11 +1,13 @@
 package ua.com.alevel.dao;
 
+import ua.com.alevel.config.annotation.Service;
 import ua.com.alevel.entity.User;
 import ua.com.alevel.util.ResourceUtil;
 
 import java.sql.*;
 import java.util.Map;
 
+@Service
 public class UserDaoImpl implements UserDao {
 
     private Connection connection;
