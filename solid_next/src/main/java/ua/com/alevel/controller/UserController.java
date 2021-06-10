@@ -1,8 +1,8 @@
 package ua.com.alevel.controller;
 
+import ua.com.alevel.config.ObjectFactory;
 import ua.com.alevel.entity.User;
 import ua.com.alevel.service.UserService;
-import ua.com.alevel.service.UserServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class UserController {
 
-    private UserService userService = new UserServiceImpl();
+    private UserService userService = ObjectFactory.getInstance().getUserService();
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
