@@ -52,6 +52,7 @@ public class ObjectFactory {
     private <I> void configure(I i) {
         objectConfigurators.forEach(objectConfigurator -> objectConfigurator.configure(i, context));
     }
+
     private <I> void invoke(Class<I> type, I i) throws IllegalAccessException, InvocationTargetException {
         for (Method method : type.getDeclaredMethods()) {
             if (method.isAnnotationPresent(PostConstruct.class)) {
@@ -60,5 +61,4 @@ public class ObjectFactory {
             }
         }
     }
-
 }

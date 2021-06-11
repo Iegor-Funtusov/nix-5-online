@@ -31,17 +31,19 @@ public class UserController implements Controller {
                 crud(position, reader);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("problem: = " + e.getMessage());
         }
     }
 
     private void runNavigation() {
+        System.out.println();
         System.out.println("if you want create user, please enter 1");
         System.out.println("if you want update user, please enter 2");
         System.out.println("if you want delete user, please enter 3");
         System.out.println("if you want findById user, please enter 4");
         System.out.println("if you want findAll user, please enter 5");
         System.out.println("if you want exit, please enter 0");
+        System.out.println();
     }
 
     private void crud(String position, BufferedReader reader) {
@@ -52,6 +54,7 @@ public class UserController implements Controller {
             case "4" : findById(reader); break;
             case "5" : findAll(reader); break;
         }
+        runNavigation();
     }
 
     private void create(BufferedReader reader) {
