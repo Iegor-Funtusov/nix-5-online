@@ -8,9 +8,10 @@ import ua.com.alevel.service.UserService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @Service
-public class UserController {
+public class UserController implements Controller {
 
     @Autowired
     private UserService userService;
@@ -20,6 +21,7 @@ public class UserController {
         System.out.println("select your option");
         String position;
         try {
+            runNavigation();
             while ((position = reader.readLine()) != null) {
                 crud(position, reader);
                 position = reader.readLine();
@@ -31,6 +33,15 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void runNavigation() {
+        System.out.println("if you want create user, please enter 1");
+        System.out.println("if you want update user, please enter 2");
+        System.out.println("if you want delete user, please enter 3");
+        System.out.println("if you want findById user, please enter 4");
+        System.out.println("if you want findAll user, please enter 5");
+        System.out.println("if you want exit, please enter 0");
     }
 
     private void crud(String position, BufferedReader reader) {
@@ -45,7 +56,6 @@ public class UserController {
 
     private void create(BufferedReader reader) {
         System.out.println("UserController.create");
-        System.out.println("userService = " + userService);
         try {
             System.out.println("Please, enter your name");
             String name = reader.readLine();
@@ -57,23 +67,61 @@ public class UserController {
             user.setName(name);
             userService.create(user);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("problem: = " + e.getMessage());
         }
     }
 
     private void update(BufferedReader reader) {
         System.out.println("UserController.update");
+        try {
+            System.out.println("Please, enter id");
+            String longString = reader.readLine();
+            long id = Long.parseLong(longString);
+            System.out.println("Please, enter your name");
+            String name = reader.readLine();
+            System.out.println("Please, enter your age");
+            String ageString = reader.readLine();
+            int age = Integer.parseInt(ageString);
+            User user = new User();
+            user.setId(id);
+            user.setAge(age);
+            user.setName(name);
+            userService.update(user);
+        } catch (IOException e) {
+            System.out.println("problem: = " + e.getMessage());
+        }
     }
 
     private void delete(BufferedReader reader) {
         System.out.println("UserController.delete");
+        try {
+            System.out.println("Please, enter id");
+            String longString = reader.readLine();
+            long id = Long.parseLong(longString);
+            userService.delete(id);
+        } catch (IOException e) {
+            System.out.println("problem: = " + e.getMessage());
+        }
     }
 
     private void findById(BufferedReader reader) {
         System.out.println("UserController.findById");
+        try {
+            System.out.println("Please, enter id");
+            String longString = reader.readLine();
+            long id = Long.parseLong(longString);
+            User user = userService.find(id);
+            System.out.println("user = " + user);
+        } catch (IOException e) {
+            System.out.println("problem: = " + e.getMessage());
+        }
     }
 
     private void findAll(BufferedReader reader) {
         System.out.println("UserController.findAll");
+        List<User> users = userService.find();
+        for (User user : users) {
+            System.out.println("user = " + user);
+        }
     }
 }

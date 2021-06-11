@@ -1,7 +1,6 @@
 package ua.com.alevel.config.configure;
 
 import ua.com.alevel.config.ApplicationContext;
-import ua.com.alevel.config.ObjectConfigurator;
 import ua.com.alevel.config.annotation.Autowired;
 
 import java.lang.reflect.Field;

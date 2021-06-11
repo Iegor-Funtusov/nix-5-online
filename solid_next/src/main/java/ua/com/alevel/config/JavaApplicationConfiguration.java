@@ -2,16 +2,17 @@ package ua.com.alevel.config;
 
 import org.reflections.Reflections;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class JavaApplicationConfiguration implements ApplicationConfiguration {
 
-    private Map<Class, Class> mapImpl;
-    private Reflections scanner;
+    private final Map<Class, Class> mapImpl;
+    private final Reflections scanner;
 
-    public JavaApplicationConfiguration(String packageToScan, Map<Class, Class> mapImpl) {
-        this.mapImpl = mapImpl;
+    public JavaApplicationConfiguration(String packageToScan) {
+        this.mapImpl = new HashMap<>();
         this.scanner = new Reflections(packageToScan);
     }
 

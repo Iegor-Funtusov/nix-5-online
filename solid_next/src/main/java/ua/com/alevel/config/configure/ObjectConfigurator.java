@@ -1,4 +1,6 @@
-package ua.com.alevel.config;
+package ua.com.alevel.config.configure;
+
+import ua.com.alevel.config.ApplicationContext;
 
 public interface ObjectConfigurator {
 
