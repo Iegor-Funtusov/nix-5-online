@@ -111,4 +111,14 @@ public class IOCRUDService implements CRUDService {
             e.printStackTrace();
         }
     }
+
+    public void rename(String from, String to) {
+        File file = new File(from);
+        try {
+            file.createNewFile();
+            file.renameTo(new File(to));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
