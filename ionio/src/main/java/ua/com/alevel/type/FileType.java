@@ -3,9 +3,10 @@ package ua.com.alevel.type;
 public enum FileType {
 
     FILE_TYPE("test.txt"),
-    FILE_HIDDEN_TYPE(".test.txt"),
+    FILE_OUT_TYPE("out.txt"),
     DIR_TYPE("test"),
-    DIRS_TYPE("test/test1/test2");
+    DIRS_TYPE("test/test1/test2"),
+    OUT_TYPE("user.out");
 
     private final String path;
 
