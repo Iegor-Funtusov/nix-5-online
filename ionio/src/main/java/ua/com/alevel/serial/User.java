@@ -8,7 +8,8 @@ public class User implements Serializable {
 
     private String firstName;
     private String lastName;
-    private transient String fullName;
+//    private transient String fullName;
+    private String fullName;
 
     public String getFirstName() {
         return firstName;

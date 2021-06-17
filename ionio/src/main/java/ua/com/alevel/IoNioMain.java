@@ -1,5 +1,7 @@
 package ua.com.alevel;
 
+import ua.com.alevel.file.csv.CsvTest;
+import ua.com.alevel.file.json.JsonTest;
 import ua.com.alevel.io.IOCRUDService;
 import ua.com.alevel.nio.NIOCRUDService;
 import ua.com.alevel.serial.UserSerializationTest;
@@ -11,6 +13,13 @@ import java.util.LinkedList;
 public class IoNioMain {
 
     public static void main(String[] args) {
+
+        CsvTest csvTest = new CsvTest();
+        csvTest.test();
+
+//        JsonTest jsonTest = new JsonTest();
+//        jsonTest.saveUsersToJson();
+
         // InputStream inputStream;       Reader reader;
         // BufferedInputStream           //BufferedReader
         // FileInputStream               //FileReader
@@ -26,8 +35,8 @@ public class IoNioMain {
 //        FileIOTest fileIOTest = new FileIOTest();
 //        fileIOTest.test();
 
-        UserSerializationTest userSerializationTest = new UserSerializationTest();
-        userSerializationTest.saveUserState();
+//        UserSerializationTest userSerializationTest = new UserSerializationTest();
+//        userSerializationTest.saveUserState();
 
 //        IOCRUDService service = new IOCRUDService();
 //        service.rename(FileType.FILE_TYPE.getPath(), "ZZZ.txt");
