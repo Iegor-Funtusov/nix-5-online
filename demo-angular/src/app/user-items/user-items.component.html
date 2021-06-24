@@ -1,0 +1,42 @@
+<div class="container">
+  <div *ngIf="pageData | async as data">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mt-2 mb-2">
+          <div class="card-header">
+            Users
+          </div>
+          <div class="card-body">
+            <table class="table table-sm table-hover">
+              <thead>
+              <tr>
+                <th *ngFor="let column of columns">
+                  <span>{{ column }}</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of data.items; index as i">
+                <td>{{ i }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.created | date: dateFormat }}</td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="details(user.id)">details</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger" (click)="delete(user.id)">delete</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" (click)="create()">new</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

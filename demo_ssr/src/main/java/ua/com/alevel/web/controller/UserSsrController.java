@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.annotations.ApiIgnore;
 import ua.com.alevel.facade.UserFacade;
 import ua.com.alevel.web.data.PageData;
 import ua.com.alevel.web.data.UserData;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 import static ua.com.alevel.util.WebRequestUtil.DEFAULT_ORDER_PARAM_VALUE;
 
+@ApiIgnore
 @Controller
 @RequestMapping(path = "/users")
 public class UserSsrController {

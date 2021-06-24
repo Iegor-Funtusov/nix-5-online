@@ -1,0 +1,41 @@
+<div class="container">
+  <div *ngIf="userDetails | async as user">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-2 mt-2">
+          <div class="card-header">
+            User details
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <tr>
+                <th>id</th>
+                <td>{{ user.id }}</td>
+              </tr>
+              <tr>
+                <th>first name</th>
+                <td>{{ user.firstName }}</td>
+              </tr>
+              <tr>
+                <th>last name</th>
+                <td>{{ user.lastName }}</td>
+              </tr>
+              <tr>
+                <th>email</th>
+                <td>{{ user.email }}</td>
+              </tr>
+              <tr>
+                <th>created</th>
+                <td>{{ user.created | date: dateFormat }}</td>
+              </tr>
+              <tr>
+                <th>updated</th>
+                <td>{{ user.updated | date: dateFormat }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
